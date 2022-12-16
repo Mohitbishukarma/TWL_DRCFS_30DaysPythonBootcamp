@@ -34,32 +34,39 @@ def rank(pwd: str) -> str:
     '''
     ## Start code here
     # POOR
-    # lower_check = 0
-    # upper_check = 0
-    # number_check = 0
-    # special_char = 0
-    # checks = [lower_check,upper_check,number_check,special_char]
-    checks = 0
+    lower_check = 0
+    upper_check = 0
+    number_check = 0
+    special_char = 0
+    checks = [lower_check,upper_check,number_check,special_char]
+    # checks = 0
+    c=0
     r = ""
     for i in pwd:
         if i in string.ascii_uppercase:
-            # upper_check = 1
-            checks += 1
+            upper_check = 1
+            # checks += 1
         elif i in string.ascii_lowercase:
-            # lower_check = 1
-            checks += 1
+            lower_check = 1
+            # checks += 1
         elif i in string.digits:
-            # number_check = 1
-            checks += 1
+            number_check = 1
+            # checks += 1
         elif i in string.punctuation:
-            # special_char = 1
-            checks += 1
-    if len(pwd) < 8 and checks < 3:
+            special_char = 1
+            # checks += 1
+    
+    for i in checks:
+        if i == 1:
+            c += 1
+
+    if len(pwd) < 8 or c < 3:
         r = "POOR"
-    elif len(pwd) >= 8 and len(pwd) <= 10 and checks == 3:
+    elif len(pwd) >= 8 and len(pwd) <= 10 or c == 3:
         r = "MODERATE"
-    elif len(pwd) > 10 and checks == 4:
+    elif len(pwd) > 10 or c == 4:
         r = "STRONG"
+    
 
     
 

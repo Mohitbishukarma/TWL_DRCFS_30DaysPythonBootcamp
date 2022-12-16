@@ -40,7 +40,7 @@ def rank(pwd: str) -> str:
     special_char = 0
     c=0
     r = ""
-    
+
     for i in pwd:
         if i in string.ascii_uppercase:
             upper_check = 1
@@ -89,7 +89,7 @@ def option1():
     
     # if option is 1
     try:
-        input_file = open('User-Pwds.txt','r')
+        input_file = open('Users-Pwds.txt','r')
         usrpwds = []
         usrpwds = input_file.read().split('\n')[:-1]
         usrpwds = [i.split(',') for i in usrpwds]

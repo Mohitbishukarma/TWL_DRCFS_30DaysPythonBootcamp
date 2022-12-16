@@ -39,22 +39,17 @@ def rank(pwd: str) -> str:
     number_check = 0
     special_char = 0
     checks = [lower_check,upper_check,number_check,special_char]
-    # checks = 0
     c=0
     r = ""
     for i in pwd:
         if i in string.ascii_uppercase:
             upper_check = 1
-            # checks += 1
         elif i in string.ascii_lowercase:
             lower_check = 1
-            # checks += 1
         elif i in string.digits:
             number_check = 1
-            # checks += 1
         elif i in string.punctuation:
             special_char = 1
-            # checks += 1
     
     for i in checks:
         if i == 1:
@@ -66,11 +61,6 @@ def rank(pwd: str) -> str:
         r = "MODERATE"
     elif len(pwd) > 10 or c == 4:
         r = "STRONG"
-    
-
-    
-
-    
     ## End code here
     return r
 
@@ -148,8 +138,11 @@ def option2():
         pwd = ''
         # Hint: user random.choice to select a random Upperalphabet(Ualphabet), Lalphabet, chars, and digits. Join then all together in pwd and check ranking
         # While the required ranking is not met continue joining new Ualphabet, Lalphabet, chars and digits.
-        
+        lst = [Ualphabets,Lalphabets,chars,digits]
         ## START CODE HERE
+        for i in range(12):
+            c_i = random.randint(0,3)
+            pwd += lst[c_i][random.randint(0,len(lst[c_i])-1)]
 
         ## END CODE HERE
         return pwd
@@ -157,12 +150,43 @@ def option2():
     # Ask for username and check 20 character limits
 
     ## START CODE HERE
+    while True:
+        username = input("Enter your name: ")
+        if len(username) < 20:
+            print("Please enter username of greater than 20 chars.")
+            continue
+        else:
+            break
 
+    
     ## END CODE HERE
 
     # Generate the password using generate() and follow the steps as guided in the function header. 
 
     ## START CODE HERE
+    p = generate()
+    while True:
+        r = rank(p)
+        if r is not "STRONG":
+            p = generate()
+        else:
+            print(f"You password is {p}")
+            print("Would you like to save this password,Y/N? ", end=" ")
+            choice = input()
+
+            if choice == "Y":
+                with open('Users-Pwds.txt', 'a') as file:
+                    file.write(f"{username,p}")
+            else:
+                print("Would you like to generate new password Y/N?", end=' ')
+                y_n = input()
+                
+                if y_n == "Y":
+                    p= generate()
+                    continue
+                else:
+                    break
+
 
     ## END CODE HERE
 
@@ -192,7 +216,7 @@ def main():
         elif inp == 1:
             option1()
         elif inp == 2:
-            pass
+            option2()
         ## END CODE HERE
 
 

@@ -152,11 +152,10 @@ def option2():
     ## START CODE HERE
     while True:
         username = input("Enter your name: ")
-        if len(username) < 20:
-            print("Please enter username of greater than 20 chars.")
+        if len(username) > 20:
+            print("Please enter username of less than 20 chars.")
             continue
-        else:
-            break
+        break
 
     
     ## END CODE HERE
@@ -167,7 +166,7 @@ def option2():
     p = generate()
     while True:
         r = rank(p)
-        if r is not "STRONG":
+        if r != "STRONG":
             p = generate()
         else:
             print(f"You password is {p}")
@@ -186,6 +185,8 @@ def option2():
                     continue
                 else:
                     break
+        
+        
 
 
     ## END CODE HERE

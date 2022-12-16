@@ -38,9 +38,9 @@ def rank(pwd: str) -> str:
     upper_check = 0
     number_check = 0
     special_char = 0
-    checks = [lower_check,upper_check,number_check,special_char]
     c=0
     r = ""
+    
     for i in pwd:
         if i in string.ascii_uppercase:
             upper_check = 1
@@ -50,6 +50,8 @@ def rank(pwd: str) -> str:
             number_check = 1
         elif i in string.punctuation:
             special_char = 1
+    
+    checks = [lower_check,upper_check,number_check,special_char]
     
     for i in checks:
         if i == 1:
@@ -86,21 +88,25 @@ def option1():
         print("Conversion error. Please enter valid option.")
     
     # if option is 1
-
-    with open('Users-Pwds.txt', 'r') as input_file:
+    try:
+        input_file = open('User-Pwds.txt','r')
         usrpwds = []
         usrpwds = input_file.read().split('\n')[:-1]
         usrpwds = [i.split(',') for i in usrpwds]
-        # print(usrpwds)
+
         usrpwds_chked = usrpwds
         for i,c in enumerate(usrpwds):
             pw_rank = rank(c[1])
             usrpwds_chked[i].append(pw_rank)
-    
-        with open('Users-Pwds-Chked.txt', 'w') as output_file:
-            output = [','.join(i) for i in usrpwds_chked]
-            output_file.writelines('\n'.join(output))
-            output_file.write('\n')
+
+    except FileNotFoundError:
+        print("There is no such file (Users-Pwds.txt).")
+        return False
+
+    with open('Users-Pwds-Chked.txt', 'w') as output_file:
+        output = [','.join(i) for i in usrpwds_chked]
+        output_file.writelines('\n'.join(output))
+        output_file.write('\n')
     ## END CODE HERE
 
     print('#'*80)
@@ -175,7 +181,10 @@ def option2():
 
             if choice == "Y":
                 with open('Users-Pwds.txt', 'a') as file:
-                    file.write(f"{username,p}")
+                    file.write(f"{username},{p}")
+                    file.write('\n')
+                    print("Your pasword is saved.")
+                    break
             else:
                 print("Would you like to generate new password Y/N?", end=' ')
                 y_n = input()
@@ -185,9 +194,6 @@ def option2():
                     continue
                 else:
                     break
-        
-        
-
 
     ## END CODE HERE
 

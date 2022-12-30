@@ -25,7 +25,7 @@ def main():
 
     print(f"The current temp is {current_temp} for today.")
     
+    return None
 
 main()
 
-"shf".strip()
